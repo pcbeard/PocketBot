@@ -38,4 +38,18 @@ public class Utils{
 	public static Packet evalPacket(DatagramPacket pk){
 		return null;
 	}
+	public static byte[] arraySlice_SE(byte[] in, int start, int end) throws IndexOutOfBoundsException{
+		byte[] result = {};
+		for(int i = start; i < end; i++){
+			result[result.length] = in[i];
+		}
+		return result;
+	}
+	public static byte[] arraySlice_SL(byte[] in, int start, int length) throws IndexOutOfBoundsException{
+		byte[] result = {};
+		for(int i = 0; i < length; i++){
+			result[i] = in[start + i];
+		}
+		return result;
+	}
 }
