@@ -1,6 +1,6 @@
-package pemapmodder.fakeclient.android;
+package legendofmcpe.fakeclient.android;
 
-import pemapmodder.fakeclient.ServerInterface;
+import legendofmcpe.fakeclient.ServerInterface;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;

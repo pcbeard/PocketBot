@@ -1,12 +1,12 @@
-package pemapmodder.fakeclient;
+package legendofmcpe.fakeclient;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
-import pemapmodder.fakeclient.android.ConnectServerService;
-import pemapmodder.fakeclient.packet.OpenConnectionRequestPacket;
-import pemapmodder.fakeclient.packet.Utils;
+import legendofmcpe.fakeclient.android.ConnectServerService;
+import legendofmcpe.fakeclient.packet.OpenConnectionRequestPacket;
+import legendofmcpe.fakeclient.packet.Utils;
 import android.content.Context;
 
 public class ServerInterface extends Thread{

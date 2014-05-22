@@ -1,4 +1,4 @@
-package pemapmodder.fakeclient.packet;
+package legendofmcpe.fakeclient.packet;
 
 import java.net.DatagramPacket;
 import java.net.SocketException;

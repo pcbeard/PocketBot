@@ -1,4 +1,4 @@
-package pemapmodder.fakeclient.android;
+package legendofmcpe.fakeclient.android;
 
 import android.os.Bundle;
 import android.app.Activity;
