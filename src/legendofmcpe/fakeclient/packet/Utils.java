@@ -52,4 +52,29 @@ public class Utils{
 		}
 		return result;
 	}
+	public static long readLong(byte[] bytes) throws IndexOutOfBoundsException{
+		long output = 0;
+		for(int i = 0; i < 8; i++){
+			output += (long) bytes[i];
+		}
+		return output;
+	}
+	public static int readInt(byte[] bytes) throws IndexOutOfBoundsException{
+		int output = 0;
+		for(int i = 0; i < 4; i++){
+			output += (int) bytes[i];
+		}
+		return output + 0x80000000;
+	}
+	public static short readShort(byte[] bytes) throws IndexOutOfBoundsException{
+		short output = 0;
+		for(int i = 0; i < 2; i++){
+			output += (short) bytes[i];
+		}
+		return (short) (output + (short) 0x8000);
+	}
+	public static String readString(byte[] bytes, int pointer){
+		String output = "";
+		
+	}
 }
