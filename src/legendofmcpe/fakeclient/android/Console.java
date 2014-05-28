@@ -18,7 +18,16 @@ public class Console{
 		this.out = new OutputStreamWriter(new FileOutputStream(log));
 	}
 	public void write(String line){
+		write(line, true);
+	}
+	public void write(String line, boolean log){
+		write(line, log, true);
+	}
+	public void write(String line, boolean log, boolean EOL){
 		unreadLog[unreadLog.length] = line;
+		if(log){
+			out.write(line + (EOL ? System.getProperty("line.separator") : ""));
+		}
 	}
 	public String[] readLog(){
 		return readLog(unreadLog.length);
@@ -34,5 +43,8 @@ public class Console{
 		}
 		unreadLog = newUnread;
 		return output;
+	}
+	@Override protected void finalize(){
+		out.close();
 	}
 }
