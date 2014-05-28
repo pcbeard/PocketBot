@@ -1,28 +1,28 @@
 package legendofmcpe.fakeclient.packet;
 
 import java.net.DatagramPacket;
-import java.net.SocketException;
+import java.net.SocketAddress;
 
 public class OpenConnectionRequestPacket extends Packet{
-	public byte[] pingID;
-	public final boolean isFirst;
-	public OpenConnectionRequestPacket(long pingID, boolean isFirst){
-		for(int i = 0x07; i >= 0; i--){
-			byte b = (byte)((pingID >> (i * 8)) & 0xff);
-			this.pingID[i] = b;
-		}
-		this.isFirst = isFirst;
+	protected int length;
+	protected SocketAddress address;
+	public OpenConnectionRequestPacket(int nullLength, SocketAddress inetAddress){
+		this.length = nullLength;
+		this.address = inetAddress;
 	}
 	@Override public DatagramPacket toUDP(){
-		byte[] buffer = Utils.mergeArrays(new byte[][]{
-				new byte[]{(isFirst ? Utils.O.CONNECTED_PING_OPEN_CONNECTIONS:Utils.O.UNCONNECTED_PING_OPEN_CONNECTIONS)},
-				Utils.MAGIC.clone(),
-				pingID.clone()
-		});
+		byte[] buffer = new byte[]{};
 		try{
-			DatagramPacket pk = new DatagramPacket(buffer, buffer.length, null);
-			return pk;
-		}catch(SocketException e){
+			byte[] magic = new byte[]{Utils.O.OPEN_CONNECTION_REQUEST};
+			byte[] protocol = new byte[]{Utils.PROTOCOL};
+			byte[] payload = new byte[]{};
+			for(int i = 0; i < this.length; i++){
+				payload[i] = (byte) 0;
+			}
+			buffer = Utils.mergeArrays(new byte[][]{magic, protocol, payload});
+			DatagramPacket pack = new DatagramPacket(buffer, buffer.length, address);
+			return pack;
+		}catch(Throwable e){
 			err(e);
 			return null;
 		}
