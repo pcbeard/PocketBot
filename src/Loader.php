@@ -1,10 +1,13 @@
 <?php
 
 define("FILE_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR);
-$cnt = require_dir(FILE_PATH) + 1;
-console("Loaded $cnt PHP files");
+require_dir(FILE_PATH);
 
-readLine();
+$mode = false;
+
+$clients = [];
+
+$console = new Console;
 
 function require_dir($path){ // always suffix with directory separator
 	$dir = dir($path);
@@ -22,6 +25,15 @@ function require_dir($path){ // always suffix with directory separator
 }
 
 function console($msg){
+	echo date("H:i:s");
 	echo $msg;
 	echo PHP_EOL;
+}
+
+function evalLine($line){
+	global $mode;
+	if($mode === false){
+		$args = explode(" ", $line);
+		$cmd = array_shift($args);
+	}
 }
