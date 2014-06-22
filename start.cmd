@@ -8,7 +8,7 @@ if exist bin\php\php.exe (
 )
 
 if exist bin\mintty.exe (
-	start "" bin\mintty.exe -h error -t "FakeClient" -w max %PHP_BINARY% src\Loader.php --enable-ansi %*
+	start "" bin\mintty.exe -h error -t "FakeClient" -w max %PHP_BINARY% src\Main.php --enable-ansi %*
 ) else (
-	%PHP_BINARY% src\Loader.php %*
+	%PHP_BINARY% src\Main.php %*
 )

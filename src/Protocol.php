@@ -1,39 +1,25 @@
 <?php
 
-define("PRECONNECT_0", 0x01);
-define("PRECONNECT_1", 0x02);
-define("OPEN_CONNECTION_REQUEST", 0x05);
-define("OPEN_CONNECTION_REPLY", 0x06);
-define("OPEN_CONNECTION_REQUEST_2", 0x07);
-define("OPEN_CONENCITON_REPLY_2", 0x08);
-define("INCOMPATIBLE_PROTOCOL", 0x1A);
-define("SERVER_INFO", 0x1D);
-define("MAGIC", "\x00\xff\xff\x00\xfe\xfe\xfe\xfe\xfd\xfd\xfd\xfd\x12\x34\x56\x78");
-
-class Protocol{
-	/**
-	 * @param int $num
-	 * @return string
-	 */
-	public static function writeBinary($num){
-		$out = "";
-		while($num > 0){
-			$end = $num & 0xFF;
-			$out = chr($end) . $out;
-			$num >>= 8;
-		}
-		return $out;
-	}
-	/**
-	 * @param string $str
-	 * @return int
-	 */
-	public static function readBinary($str){
-		$out = 0;
-		for($i = 0; $i < strlen($str); $i++){
-			$out <<= 8;
-			$out |= ord($str{$i});
-		}
-		return $out;
-	}
+abstract class Protocol{
+	// raklib
+	const REQ_ADS = "\x01";
+	const ADS = "\x1C";
+	const OPEN_CON_REQ_1 = "\x05";
+	const OPEN_CON_REP_1 = "\x06";
+	const OPEN_CON_REQ_2 = "\x07";
+	const OPEN_CON_REP_2 = "\x08";
+	const WRONG_PROTOCOL = "\x1A";
+	// data packets
+	// sent
+	const LOGIN = "\x82";
+	// received
+	const LOGIN_STATUS = "\x83";
+	// mutual
+	
+	// constants
+	const SECURITY_COOKIE = "\x04\x3f\x57\xfe\xfd";
+	const STRUCTURE = "\x05";
+	const PROTOCOL = "\x15";
+	const MAGIC = "\x00\xff\xff\x00\xfe\xfe\xfe\xfe\xfd\xfd\xfd\xfd\x12\x34\x56\x78";
+	const CLIENT_ID = 0x13b07b07; // leet for Im Bot Bot
 }
