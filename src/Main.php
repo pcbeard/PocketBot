@@ -20,8 +20,13 @@ require_once(dirname(__FILE__)."/Protocol.php");
 require_once(dirname(__FILE__)."/Client.php");
 
 require_once(dirname(__FILE__)."/ConsoleLoop.php");
+
+console("Loading files done", 20);
+
 $console = new ConsoleLoop;
+/** @var Client[] $clients */
 $clients = [];
+/** @var string $currentClient */
 $currentClient = false;
 $console->start();
 
@@ -32,5 +37,5 @@ function console($message, $debugLevel = 1){
 	if(DEBUG < $debugLevel or $message === ""){
 		return;
 	}
-	echo TextFormat::toANSI(TextFormat::AQUA.date("h:m:s ").TextFormat::RESET.$message.PHP_EOL);
+	echo TextFormat::toANSI(TextFormat::AQUA.date("h:m:s ").TextFormat::RESET.$message.PHP_EOL.TextFormat::RESET);
 }

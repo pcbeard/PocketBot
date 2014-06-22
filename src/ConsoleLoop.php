@@ -24,7 +24,7 @@ class ConsoleLoop{
 		switch(trim(strtolower($cmd = array_shift($args)))){
 			case "stop":
 				foreach($clients as $client){
-					$client->quit();
+					$client->end("Stopped by terminal");
 				}
 				$this->running = false;
 				break;

@@ -372,3 +372,5 @@ class Binary{
 	}
 
 }
+
+define("ENDIANNESS", Binary::LITTLE_ENDIAN);
