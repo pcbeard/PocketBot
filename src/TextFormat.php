@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * This file is the work of the PocketMine team. All credits to them; we had done no amendments to this file
+ */
+
+/**
  * Class used to handle Minecraft chat format, and convert it to other formats like ANSI or HTML
  */
 class TextFormat{
