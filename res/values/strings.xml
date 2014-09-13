@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PocketBot</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_console">ConsoleActivity</string>
-    <string name="console_input_hint">Chat here (or command starting with a slash)</string>
-    <string name="console_send">Send</string>
+	<string name="app_name">PocketBot</string>
+	<string name="hello_world">Hello world!</string>
+	<string name="action_settings">Settings</string>
+	<string name="title_activity_console">ConsoleActivity</string>
+	<string name="console_input_hint">Chat here (or command starting with a slash)</string>
+	<string name="console_send">Send</string>
+	<string name="console_cannot_bind_service">Cannot bind to PocketBot!</string>
+	<string name="console_exception">Unexpected exception caught: %class% (message: %message%)</string>
+	<string name="console_exception_trace">Stack trace:</string>
+	<string name="console_exception_trace_line">%i%: %class%.%method%() (line %line% at %file%)</string>
+	<string name="console_debug">[DEBUG]%nbsp;</string>
+	<string name="console_error">[ERROR]%nbsp;</string>
+	<string name="console_warning">[WARNING]%nbsp;</string>
+	<string name="console_notice">[NOTICE]%nbsp;</string>
+	<string name="console_critical">[CRITICAL]%nbsp;</string>
+	<string name="console_cmd">[CMD]%nbsp;</string>
+	<string name="console_info">[INFO]%nbsp;</string>
+	<string name="console_trace">[TRACE]%nbsp;</string>
+	<string name="bot_socket_connect_error">Could not connect to your network! Check your connection.</string>
+	<string name="bot_unknown_packet">Unknown packet received! Packet ID - $hexpid$, Hex buffer - $hexbuffer$, Raw buffer: $buffer$</string>
 
 </resources>

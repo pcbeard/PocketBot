@@ -26,6 +26,12 @@
             android:name=".ConsoleActivity"
             android:label="@string/title_activity_console" >
         </activity>
+
+        <service
+            android:name=".PocketBotService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
