@@ -6,4 +6,5 @@ public interface Logger{
 	public void error(String line);
 	public void critical(String line);
 	public void exception(Throwable t);
+	public void warning(String string);
 }

@@ -32,7 +32,7 @@ public class PacketParser{
 			}
 			catch(Exception e){}
 		}
-		
+		bot.getLogger().warning(bot.getLang().unknown_packet(pid, bb));
 		return null;
 	}
 }

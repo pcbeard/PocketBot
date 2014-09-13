@@ -11,8 +11,8 @@ public class PocketBot extends Thread{
 	private DatagramSocket socket;
 	private final InetSocketAddress address;
 	private Logger logger;
-	private LangSet lang;
-	public PocketBot(String name, InetSocketAddress address, Logger logger, LangSet lang){
+	private Lang lang;
+	public PocketBot(String name, InetSocketAddress address, Logger logger, Lang lang){
 		super("PocketBot_".concat(name));
 		this.address = address;
 		this.logger = logger;
@@ -28,7 +28,7 @@ public class PocketBot extends Thread{
 		connect();
 	}
 	private void connect(){
-		
+		// TODO
 	}
 	public DatagramSocket getSocket(){
 		return socket;
@@ -40,5 +40,11 @@ public class PocketBot extends Thread{
 	}
 	public InetSocketAddress getAddress(){
 		return address;
+	}
+	public Logger getLogger(){
+		return logger;
+	}
+	public Lang getLang(){
+		return lang;
 	}
 }
