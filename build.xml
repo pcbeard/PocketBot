@@ -1,0 +1,19 @@
+<project name="PocketBot" basedir="." default="test">
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="jar.dir" value="${build.dir}/jars" />
+
+	<target name="delete">
+		<delete dir="${build.dir}" />
+	</target>
+	<target name="compile" depends="delete">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false" />
+	</target>
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}" />
+	</target>
+	<target name="test" depends="jar" />
+</project>
