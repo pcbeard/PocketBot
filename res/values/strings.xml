@@ -21,5 +21,9 @@
 	<string name="console_trace">[TRACE]%nbsp;</string>
 	<string name="bot_socket_connect_error">Could not connect to your network! Check your connection.</string>
 	<string name="bot_unknown_packet">Unknown packet received! Packet ID - $hexpid$, Hex buffer - $hexbuffer$, Raw buffer: $buffer$</string>
+	<string name="bot_connect_packet_error_abort">Stop connecting to server due to unknown packet received during connection process</string>
+	<string name="bot_incorrect_raknet_protocol">RakNet protocol version doesn\'t match - server expects 0x$hexexpected$</string>
+	<string name="bot_server_no_response">No response from server. Is the server offline?</string>
+	<string name="bot_stopping">Connection to server stopped.</string>
 
 </resources>

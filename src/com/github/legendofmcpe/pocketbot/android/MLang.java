@@ -28,4 +28,26 @@ public class MLang implements Lang{
 				.replace("%buffer%", new String(bb.array()))
 				.replace("%hexbuffer%", buffer.toString());
 	}
+
+	@Override
+	public String server_no_response(){
+		return ctx.getString(R.string.bot_server_no_response);
+	}
+
+	@Override
+	public String stopping(){
+		return ctx.getString(R.string.bot_stopping);
+	}
+
+	@Override
+	public String incorrect_raknet_protocol(byte expected){
+		return ctx.getString(R.string.bot_incorrect_raknet_protocol)
+				.replace("$expected$", String.valueOf((int) expected))
+				.replace("$hexexpected$", Integer.toHexString((byte) expected));
+	}
+
+	@Override
+	public String connect_packet_error_abort(){
+		return ctx.getString(R.string.bot_connect_packet_error_abort);
+	}
 }
