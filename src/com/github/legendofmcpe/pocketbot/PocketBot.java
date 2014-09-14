@@ -1,54 +1,41 @@
 package com.github.legendofmcpe.pocketbot;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.legendofmcpe.pocketbot.packet.Packet;
+import com.github.legendofmcpe.pocketbot.packet.NetworkManager;
 
 public class PocketBot extends Thread{
-	private DatagramSocket socket;
-	private final InetSocketAddress address;
+	private InetSocketAddress address;
+	private NetworkManager networkMgr;
 	private Logger logger;
 	private Lang lang;
 	private List<String> msgQueue = new ArrayList<String>();
-	public PocketBot(String name, InetSocketAddress address, Logger logger, Lang lang){
+	private boolean running = false;
+	private String username;
+	private long clientId;
+	private short mtu = Short.MAX_VALUE;
+
+	public PocketBot(String name, InetSocketAddress address, Logger logger, Lang lang, String username, long clientId){
 		super("PocketBot_".concat(name));
 		this.address = address;
 		this.logger = logger;
-	}
-
-	private void tick(){
-		for(String msg: msgQueue){
-			
-			// TODO proceed message
-		}
+		this.username = username;
+		this.clientId = clientId;
+		networkMgr = new NetworkManager(this);
 	}
 
 	@Override
 	public void run(){
-		try{
-			socket = new DatagramSocket();
-		}
-		catch(Exception e){
-			logger.critical(lang.socket_connect_error());
-		}
-		connect();
+		running = true;
+		networkMgr.start();
 	}
-	private void connect(){
-		// TODO
+	public void end(){
+		running = false;
+		logger.info(lang.stopping());
 	}
-	public DatagramSocket getSocket(){
-		return socket;
-	}
-	public synchronized void sendPacket(Packet pk) throws IOException{
-		DatagramPacket packet = new DatagramPacket(
-				pk.getBuffer(), pk.getBuffer().length, address);
-		socket.send(packet);
-	}
+
 	public InetSocketAddress getAddress(){
 		return address;
 	}
@@ -58,9 +45,28 @@ public class PocketBot extends Thread{
 	public Lang getLang(){
 		return lang;
 	}
+	public boolean isRunning(){
+		return running;
+	}
+	public String getUsername(){
+		return username;
+	}
+	public long getClientId(){
+		return clientId;
+	}
+
+	public short getMtu(){
+		return mtu;
+	}
+
+	public void setMtu(short mtu){
+		this.mtu = mtu;
+	}
+
 	public void queueMessage(String str){
 		if(str.length() > 0xFFFF){
 			throw new StringIndexOutOfBoundsException("The string is too long (more than 65535 bytes)!");
 		}
+		msgQueue.add(str);
 	}
 }
