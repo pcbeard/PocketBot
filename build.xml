@@ -1,8 +1,10 @@
-<project name="PocketBot" basedir="." default="test">
+<project name="PocketBot" basedir="." default="main">
 	<property name="src.dir" value="src" />
 	<property name="build.dir" value="build" />
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.dir" value="${build.dir}/jars" />
+
+	<property name="main-class" value="com.github.legendofmcpe.pocketbot.Runner" />
 
 	<target name="delete">
 		<delete dir="${build.dir}" />
@@ -15,5 +17,12 @@
 		<mkdir dir="${jar.dir}" />
 		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}" />
 	</target>
-	<target name="test" depends="jar" />
+	<target name="run" depends="jar">
+		<java fork="true" timeout="30000" classname="${main-class}">
+			<classpath>
+				<path location="${jar.dir}/${ant.project.name}.jar" />
+			</classpath>
+		</java>
+	</target>
+	<target name="test" depends="main" />
 </project>
