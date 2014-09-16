@@ -1,12 +1,13 @@
 package com.github.legendofmcpe.pocketbot.packet;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.legendofmcpe.pocketbot.Constants;
 import com.github.legendofmcpe.pocketbot.PocketBot;
 import com.github.legendofmcpe.pocketbot.packet.raknet.ReceivedRaknetPacket;
+import com.github.legendofmcpe.pocketbot.utils.Constants;
 
 public class PacketParser implements Constants{
 	private Map<Byte, Class<? extends ReceivedRaknetPacket>> packetTypes;
@@ -23,7 +24,7 @@ public class PacketParser implements Constants{
 		return true;
 	}
 	public ReceivedRaknetPacket parsePacket(byte[] buffer){
-		ByteBuffer bb = ByteBuffer.wrap(buffer);
+		ByteBuffer bb = ByteBuffer.wrap(buffer).order(ByteOrder.LITTLE_ENDIAN);
 		Byte pid = bb.get();
 		if(packetTypes.containsKey(pid)){
 			try{

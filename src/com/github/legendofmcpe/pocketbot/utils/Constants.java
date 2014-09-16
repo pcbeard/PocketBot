@@ -1,4 +1,4 @@
-package com.github.legendofmcpe.pocketbot;
+package com.github.legendofmcpe.pocketbot.utils;
 
 public interface Constants{
 	public final static byte RAKNET_VERSION = 5;

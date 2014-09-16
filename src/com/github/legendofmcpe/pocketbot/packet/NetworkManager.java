@@ -10,17 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.legendofmcpe.pocketbot.PocketBot;
+import com.github.legendofmcpe.pocketbot.packet.mc.DataPacket;
 import com.github.legendofmcpe.pocketbot.packet.raknet.IncompatibleProtocolVersion;
 import com.github.legendofmcpe.pocketbot.packet.raknet.OpenConnectionReply1;
 import com.github.legendofmcpe.pocketbot.packet.raknet.OpenConnectionRequest1;
 import com.github.legendofmcpe.pocketbot.packet.raknet.OpenConnectionRequest2;
+import com.github.legendofmcpe.pocketbot.packet.raknet.RaknetDataPacket;
 import com.github.legendofmcpe.pocketbot.packet.raknet.ReceivedRaknetPacket;
+import com.github.legendofmcpe.pocketbot.packet.raknet.SentCustomPacket;
 
 public class NetworkManager{
 	private PocketBot bot;
 	private DatagramSocket sk;
 	private InetSocketAddress addr;
 	private PacketParser parser;
+	private int seqNumber;
 
 	public NetworkManager(PocketBot bot){
 		this.bot = bot;
@@ -99,6 +103,18 @@ public class NetworkManager{
 		}
 		catch(SocketTimeoutException e){
 			return null;
+		}
+	}
+
+	public void sendDataPacket(DataPacket pk){
+		List<RaknetDataPacket> pks = new ArrayList<RaknetDataPacket>(1);
+		pks.add(new RaknetDataPacket(pk));
+		SentCustomPacket scp = new SentCustomPacket((byte) 0x80, pks, seqNumber++);
+		try{
+			scp.sendTo(sk, addr);
+		}
+		catch(IOException e){
+			e.printStackTrace();
 		}
 	}
 
