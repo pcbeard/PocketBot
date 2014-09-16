@@ -1,6 +1,7 @@
-package com.github.legendofmcpe.pocketbot.packet;
+package com.github.legendofmcpe.pocketbot.packet.raknet;
 
-import com.github.legendofmcpe.pocketbot.packet.raknet.ReceivedRaknetPacket;
+import com.github.legendofmcpe.pocketbot.PocketBot;
+
 
 public class UnknownReceivedPacket extends ReceivedRaknetPacket{
 	private byte pid;
@@ -10,13 +11,12 @@ public class UnknownReceivedPacket extends ReceivedRaknetPacket{
 		this.pid = pid;
 	}
 
-	@Override
 	public byte getPid(){
 		return pid;
 	}
 
 	@Override
-	protected void decode(){
+	protected void decode(PocketBot bot){
 		buffer = new byte[bb().remaining()];
 		bb().get(buffer);
 	}

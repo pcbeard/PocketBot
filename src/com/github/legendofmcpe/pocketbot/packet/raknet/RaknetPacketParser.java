@@ -1,4 +1,4 @@
-package com.github.legendofmcpe.pocketbot.packet;
+package com.github.legendofmcpe.pocketbot.packet.raknet;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -6,13 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.legendofmcpe.pocketbot.PocketBot;
-import com.github.legendofmcpe.pocketbot.packet.raknet.ReceivedRaknetPacket;
 import com.github.legendofmcpe.pocketbot.utils.Constants;
 
-public class PacketParser implements Constants{
+public class RaknetPacketParser implements Constants{
 	private Map<Byte, Class<? extends ReceivedRaknetPacket>> packetTypes;
 	private PocketBot bot;
-	public PacketParser(int size, PocketBot bot){
+	public RaknetPacketParser(int size, PocketBot bot){
 		packetTypes = new HashMap<Byte, Class<? extends ReceivedRaknetPacket>>(size);
 		this.bot = bot;
 	}
@@ -29,15 +28,17 @@ public class PacketParser implements Constants{
 		if(packetTypes.containsKey(pid)){
 			try{
 				ReceivedRaknetPacket pk = packetTypes.get(pid).newInstance();
-				pk.decode(bb);
+				pk.decode(bot, bb);
 				return pk;
 			}
-			catch(Exception e){}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		bot.getLogger().warning(bot.getLang().unknown_packet(pid, bb));
 		UnknownReceivedPacket pack = new UnknownReceivedPacket();
 		pack.setPid(pid);
-		pack.decode(bb);
+		pack.decode(bot, bb);
 		return pack;
 	}
 }

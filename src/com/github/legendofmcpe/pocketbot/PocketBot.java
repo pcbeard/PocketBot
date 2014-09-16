@@ -60,6 +60,9 @@ public class PocketBot extends Thread{
 	public void setMtu(short mtu){
 		this.mtu = mtu;
 	}
+	public NetworkManager getNetworkMgr(){
+		return networkMgr;
+	}
 
 	public void queueMessage(String str){
 		if(str.length() > 0xFFFF){

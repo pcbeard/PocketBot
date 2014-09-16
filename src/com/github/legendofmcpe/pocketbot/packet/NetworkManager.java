@@ -11,11 +11,14 @@ import java.util.List;
 
 import com.github.legendofmcpe.pocketbot.PocketBot;
 import com.github.legendofmcpe.pocketbot.packet.mc.DataPacket;
+import com.github.legendofmcpe.pocketbot.packet.mc.DataPacketParser;
 import com.github.legendofmcpe.pocketbot.packet.raknet.IncompatibleProtocolVersion;
 import com.github.legendofmcpe.pocketbot.packet.raknet.OpenConnectionReply1;
+import com.github.legendofmcpe.pocketbot.packet.raknet.OpenConnectionReply2;
 import com.github.legendofmcpe.pocketbot.packet.raknet.OpenConnectionRequest1;
 import com.github.legendofmcpe.pocketbot.packet.raknet.OpenConnectionRequest2;
 import com.github.legendofmcpe.pocketbot.packet.raknet.RaknetDataPacket;
+import com.github.legendofmcpe.pocketbot.packet.raknet.RaknetPacketParser;
 import com.github.legendofmcpe.pocketbot.packet.raknet.ReceivedRaknetPacket;
 import com.github.legendofmcpe.pocketbot.packet.raknet.SentCustomPacket;
 
@@ -23,14 +26,15 @@ public class NetworkManager{
 	private PocketBot bot;
 	private DatagramSocket sk;
 	private InetSocketAddress addr;
-	private PacketParser parser;
+	private RaknetPacketParser rpParser;
+	private DataPacketParser dpParser;
 	private int seqNumber;
 
 	public NetworkManager(PocketBot bot){
 		this.bot = bot;
 		addr = bot.getAddress();
-		parser = new PacketParser(32, bot);
-		ReceivedRaknetPacket.registerTypes(parser);
+		rpParser = new RaknetPacketParser(32, bot);
+		ReceivedRaknetPacket.registerTypes(rpParser);
 	}
 	public void start(){
 		connect();
@@ -99,7 +103,7 @@ public class NetworkManager{
 		try{
 			sk.receive(pk);
 			byte[] buffer = pk.getData();
-			return parser.parsePacket(buffer);
+			return rpParser.parsePacket(buffer);
 		}
 		catch(SocketTimeoutException e){
 			return null;
@@ -116,6 +120,14 @@ public class NetworkManager{
 		catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+
+	public DataPacketParser getDataPacketParser(){
+		return dpParser;
+	}
+
+	public void handlePacket(DataPacket parsePacket){
+		// TODO Auto-generated method stub
 	}
 
 	public static List<Integer> getMtuList(){
