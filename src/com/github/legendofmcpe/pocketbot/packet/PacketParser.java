@@ -1,9 +1,8 @@
 package com.github.legendofmcpe.pocketbot.packet;
 
 import java.nio.ByteBuffer;
+import java.util.HashMap;
 import java.util.Map;
-
-import android.support.v4.util.ArrayMap;
 
 import com.github.legendofmcpe.pocketbot.Constants;
 import com.github.legendofmcpe.pocketbot.PocketBot;
@@ -13,7 +12,7 @@ public class PacketParser implements Constants{
 	private Map<Byte, Class<? extends ReceivedRaknetPacket>> packetTypes;
 	private PocketBot bot;
 	public PacketParser(int size, PocketBot bot){
-		packetTypes = new ArrayMap<Byte, Class<? extends ReceivedRaknetPacket>>(size);
+		packetTypes = new HashMap<Byte, Class<? extends ReceivedRaknetPacket>>(size);
 		this.bot = bot;
 	}
 	public boolean registerPacketType(Byte pid, Class<? extends ReceivedRaknetPacket> packet){
