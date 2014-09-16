@@ -54,11 +54,9 @@ public class PocketBot extends Thread{
 	public long getClientId(){
 		return clientId;
 	}
-
 	public short getMtu(){
 		return mtu;
 	}
-
 	public void setMtu(short mtu){
 		this.mtu = mtu;
 	}
