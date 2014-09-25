@@ -24,6 +24,9 @@ public class SentCustomPacket extends SentRaknetPacket{
 	private List<RaknetDataPacket> packets;
 	private int seqNumber;
 
+	public SentCustomPacket(List<RaknetDataPacket> packets, int seqNumber){
+		this((byte) 0x84, packets, seqNumber);
+	}
 	public SentCustomPacket(byte pid, List<RaknetDataPacket> packets, int sequenceNumber){
 		super(new ListCounter(packets, 4));
 		this.pid = pid;

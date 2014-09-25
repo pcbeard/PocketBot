@@ -29,6 +29,7 @@ public class NetworkManager{
 	private RaknetPacketParser rpParser;
 	private DataPacketParser dpParser;
 	private int seqNumber;
+	private List<RaknetDataPacket> dataPacketQueue = new ArrayList<RaknetDataPacket>(4);
 
 	public NetworkManager(PocketBot bot){
 		this.bot = bot;
@@ -110,7 +111,23 @@ public class NetworkManager{
 		}
 	}
 
-	public void sendDataPacket(DataPacket pk){
+	public void addToQueue(RaknetDataPacket pk){
+		dataPacketQueue.add(pk);
+	}
+	public void sendDataPackets(){
+		SentCustomPacket pk = new SentCustomPacket(
+				new ArrayList<RaknetDataPacket>(dataPacketQueue), seqNumber++);
+		dataPacketQueue.clear();
+		try{
+			pk.sendTo(sk, addr);
+			dataPacketQueue.clear();
+		}
+		catch(IOException e){
+			e.printStackTrace(bot.getLogger().getPrinter());
+		}
+		
+	}
+	public void sendDataPacketDirect(DataPacket pk){
 		List<RaknetDataPacket> pks = new ArrayList<RaknetDataPacket>(1);
 		pks.add(new RaknetDataPacket(pk));
 		SentCustomPacket scp = new SentCustomPacket((byte) 0x80, pks, seqNumber++);
