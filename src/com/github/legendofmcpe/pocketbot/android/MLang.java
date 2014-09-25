@@ -8,6 +8,7 @@ import com.github.legendofmcpe.pocketbot.Lang;
 
 public class MLang implements Lang{
 	private Context ctx;
+
 	public MLang(Context ctx){
 		this.ctx = ctx;
 	}

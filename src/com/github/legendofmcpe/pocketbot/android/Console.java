@@ -1,5 +1,8 @@
 package com.github.legendofmcpe.pocketbot.android;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +21,22 @@ public class Console implements Logger{
 	private Context ctx;
 	private Map<String, UpdateListener> listeners = new ArrayMap<String, UpdateListener>(1);
 	private List<String> lines = new ArrayList<String>();
+	private PrintStream printer;
+
 	public Console(Context ctx){
 		this.ctx = ctx;
+		printer = new PrintStream(new OutputStream(){
+			private String line = "";
+			@Override
+			public void write(int arg0) throws IOException{
+				if(arg0 == '\n'){
+					addLine(line);
+				}
+				else{
+					line += (char) arg0;
+				}
+			}
+		});
 	}
 	public boolean addListener(String key, UpdateListener listener){
 		if(listeners.containsKey(key)){
@@ -65,20 +82,21 @@ public class Console implements Logger{
 	}
 	@Override
 	public synchronized void exception(Throwable t){
-		addLine(ctx.getString(R.string.console_exception)
-				.replace("%class%", t.getClass().getSimpleName())
-				.replace("%msg%", t.getMessage()));
-		
-		addLine(ctx.getString(R.string.console_exception_trace));
-		int i = 0;
-		for(StackTraceElement l: t.getStackTrace()){
-			trace(ctx.getString(R.string.console_exception_trace_line)
-					.replace("%i%", String.valueOf(i++))
-					.replace("%file%", l.getFileName())
-					.replace("%line%", String.valueOf(l.getLineNumber()))
-					.replace("%method%", l.getMethodName())
-					.replace("%class%", l.getClassName()));
-		}
+		t.printStackTrace(printer);
+//		addLine(ctx.getString(R.string.console_exception)
+//				.replace("%class%", t.getClass().getSimpleName())
+//				.replace("%msg%", t.getMessage()));
+//		
+//		addLine(ctx.getString(R.string.console_exception_trace));
+//		int i = 0;
+//		for(StackTraceElement l: t.getStackTrace()){
+//			trace(ctx.getString(R.string.console_exception_trace_line)
+//					.replace("%i%", String.valueOf(i++))
+//					.replace("%file%", l.getFileName())
+//					.replace("%line%", String.valueOf(l.getLineNumber()))
+//					.replace("%method%", l.getMethodName())
+//					.replace("%class%", l.getClassName()));
+//		}
 	}
 	private void addLine(String line){
 		line = line.trim();
@@ -88,6 +106,10 @@ public class Console implements Logger{
 				listener.onLineAdded(l);
 			}
 		}
+	}
+	@Override
+	public PrintStream getPrinter(){
+		return printer;
 	}
 
 }
