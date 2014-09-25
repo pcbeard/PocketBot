@@ -26,7 +26,7 @@ public abstract class DataPacket implements Constants{
 				.concat(" cannot be encoded."));
 	}
 
-	public void decode(ByteBuffer bb){
+	public void decode(PocketBot bot, ByteBuffer bb){
 		throw new UnsupportedOperationException(getClass().getSimpleName()
 				.concat(" cannot be decoded."));
 	}

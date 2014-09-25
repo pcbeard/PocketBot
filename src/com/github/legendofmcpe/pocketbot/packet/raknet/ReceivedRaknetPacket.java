@@ -15,7 +15,7 @@ public abstract class ReceivedRaknetPacket implements Constants{
 			decode(bot);
 		}
 		catch(BufferUnderflowException e){
-			e.printStackTrace();
+			e.printStackTrace(bot.getLogger().getPrinter());
 		}
 	}
 	protected abstract void decode(PocketBot bot);

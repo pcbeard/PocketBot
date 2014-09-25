@@ -35,6 +35,7 @@ public class NetworkManager{
 		this.bot = bot;
 		addr = bot.getAddress();
 		rpParser = new RaknetPacketParser(32, bot);
+		dpParser = new DataPacketParser(bot);
 		ReceivedRaknetPacket.registerTypes(rpParser);
 	}
 	public void start(){
@@ -135,7 +136,7 @@ public class NetworkManager{
 			scp.sendTo(sk, addr);
 		}
 		catch(IOException e){
-			e.printStackTrace();
+			e.printStackTrace(bot.getLogger().getPrinter());
 		}
 	}
 

@@ -32,7 +32,7 @@ public class RaknetPacketParser implements Constants{
 				return pk;
 			}
 			catch(Exception e){
-				e.printStackTrace();
+				e.printStackTrace(bot.getLogger().getPrinter());
 			}
 		}
 		bot.getLogger().warning(bot.getLang().unknown_packet(pid, bb));
