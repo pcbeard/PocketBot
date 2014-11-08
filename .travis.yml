@@ -2,4 +2,3 @@
 language: php
 branches:
 - master
-- android
