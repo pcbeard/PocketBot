@@ -1,6 +1,6 @@
 <?php
 
-namespace LegendOfMCPE\FakeClient\network;
+namespace LegendOfMCPE\PocketBot\network;
 
 class UDPSocket{
 	private $socket;

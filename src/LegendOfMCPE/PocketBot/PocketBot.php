@@ -4,7 +4,7 @@ namespace {
 	/** @var string[] $AUTOLOAD_ROOTS */
 	/** @noinspection PhpUnusedLocalVariableInspection */
 	$AUTOLOAD_ROOTS = [];
-	/** @var \LegendOfMCPE\FakeClient\Client $connections */
+	/** @var \LegendOfMCPE\PocketBot\Client $connections */
 	/** @noinspection PhpUnusedLocalVariableInspection */
 	$connections = [];
 	function add_autoload_root_path($path){
@@ -28,7 +28,7 @@ namespace {
 	spl_autoload_register("autoload_class", true);
 }
 
-namespace LegendOfMCPE\FakeClient{
+namespace LegendOfMCPE\PocketBot{
 	$console = new ConsoleReader;
 	$console->start();
 

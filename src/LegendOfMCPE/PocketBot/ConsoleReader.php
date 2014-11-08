@@ -1,6 +1,6 @@
 <?php
 
-namespace LegendOfMCPE\FakeClient;
+namespace LegendOfMCPE\PocketBot;
 
 class ConsoleReader extends \Thread{
 	public $running;

@@ -1,8 +1,8 @@
 <?php
 
-namespace LegendOfMCPE\FakeClient;
+namespace LegendOfMCPE\PocketBot;
 
-use LegendOfMCPE\FakeClient\network\UDPSocket;
+use LegendOfMCPE\PocketBot\network\UDPSocket;
 
 class Client extends \Thread{
 	private $socket;

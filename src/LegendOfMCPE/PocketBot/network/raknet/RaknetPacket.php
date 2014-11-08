@@ -1,6 +1,6 @@
 <?php
 
-namespace LegendOfMCPE\FakeClient\network\raknet;
+namespace LegendOfMCPE\PocketBot\network\raknet;
 /**
  * Class RaknetPacket
  * @package LegendOfMCPE\FakeClient\network\raknet
