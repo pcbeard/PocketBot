@@ -2,3 +2,6 @@
 language: php
 branches:
 - master
+
+script:
+- php src/LegendOfMCPE/PocketBot/PocketBot.php
