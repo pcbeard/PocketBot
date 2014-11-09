@@ -1,12 +1,13 @@
 <?php
 
 namespace LegendOfMCPE\PocketBot\network\raknet;
+
 /**
  * Class RaknetPacket
  * @package LegendOfMCPE\FakeClient\network\raknet
  * Methods partly copied from RakLib by the PocketMine Team
  */
-abstract class RaknetPacket implements RaknetIDs{
+abstract class RaknetPacket extends RaknetIDs{
 	protected $buffer;
 	private $pointer;
 	public abstract function getPid();
@@ -14,14 +15,21 @@ abstract class RaknetPacket implements RaknetIDs{
 		$this->buffer = $buffer;
 		$this->decode();
 	}
+	/**
+	 * @return string
+	 * @throws \RuntimeException
+	 */
 	public function encode(){
 		throw new \RuntimeException((new \ReflectionClass($this))->getShortName() . " cannot be encoded");
 	}
 	public function decode(){
 		throw new \RuntimeException((new \ReflectionClass($this))->getShortName() . " cannot be decoded");
 	}
-	public function write($char){
+	public function writeChar($char){
 		$this->buffer .= is_int($char) ? chr($char):$char;
+	}
+	public function write($buffer){
+		$this->buffer .= $buffer;
 	}
 	public function readChar($char = false){
 		$ord = ord($this->buffer{$this->pointer++});

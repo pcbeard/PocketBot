@@ -16,8 +16,8 @@ namespace {
 	}
 	add_autoload_root_path("src");
 	function autoload_class($class){
-		global $AUTOLAOD_ROOTS;
-		foreach($AUTOLAOD_ROOTS as $root){
+		global $AUTOLOAD_ROOTS;
+		foreach($AUTOLOAD_ROOTS as $root){
 			$path = $root . str_replace("\\", "/", $class) . ".php";
 			if(is_file($path)){
 				require_once $path;
@@ -29,7 +29,8 @@ namespace {
 }
 
 namespace LegendOfMCPE\PocketBot{
-	$console = new ConsoleReader;
+	$enum = new Enum;
+	$console = new ConsoleReader($enum);
 	$console->start();
 
 	function console($message){
