@@ -6,12 +6,14 @@ use LegendOfMCPE\PocketBot\network\raknet;
 use LegendOfMCPE\PocketBot\network\UDPSocket;
 
 class Client extends \Thread{
+	private $id;
 	private $socket;
 	private $connected = false;
 	private $failureMessage = null;
 	private $mtu;
 	private $commandQueue;
-	public function __construct($ip, $port, $username){
+	public function __construct($id, $ip, $port, $username){
+		$this->id = $id;
 		$this->socket = new UDPSocket($ip, $port);
 		$this->username = $username;
 		$this->commandQueue = new Enum;
@@ -47,7 +49,19 @@ class Client extends \Thread{
 		$this->failureMessage = $msg;
 		console("[CRITICAL] $msg");
 	}
+	/**
+	 * @param array $line
+	 */
 	public function queueCommand($line){
 		$this->commandQueue->add($line);
+	}
+	public function getID(){
+		return $this->id;
+	}
+	public function __toString(){
+		return "client " . $this->socket->__toString();
+	}
+	public function forceStop($param){
+		// TODO
 	}
 }

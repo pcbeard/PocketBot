@@ -4,9 +4,9 @@ namespace {
 	/** @var string[] $AUTOLOAD_ROOTS */
 	/** @noinspection PhpUnusedLocalVariableInspection */
 	$AUTOLOAD_ROOTS = [];
-	/** @var \LegendOfMCPE\PocketBot\Client $connections */
+	/** @var \LegendOfMCPE\PocketBot\Client[] $clients */
 	/** @noinspection PhpUnusedLocalVariableInspection */
-	$connections = [];
+	$clients = [];
 	function add_autoload_root_path($path){
 		global $AUTOLOAD_ROOTS;
 		if(!is_dir($path)){
@@ -29,8 +29,10 @@ namespace {
 }
 
 namespace LegendOfMCPE\PocketBot{
-	$enum = new Enum;
-	$console = new ConsoleListener($enum);
+	/** @var Config $config */
+	/** @noinspection PhpUnusedLocalVariableInspection */
+	$config = new Config;
+	$console = new ConsoleListener;
 	$console->start();
 
 	function console($message){
