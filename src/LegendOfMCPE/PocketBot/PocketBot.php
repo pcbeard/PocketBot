@@ -26,17 +26,11 @@ namespace {
 		}
 	}
 	spl_autoload_register("autoload_class", true);
-	if(!defined("STDIN")){
-		define("STDIN", fopen("php://stdin", "r"));
-		register_shutdown_function(function(){
-			fclose(STDIN);
-		}); // not needed?
-	}
 }
 
 namespace LegendOfMCPE\PocketBot{
 	$enum = new Enum;
-	$console = new ConsoleReader($enum);
+	$console = new ConsoleListener($enum);
 	$console->start();
 
 	function console($message){
